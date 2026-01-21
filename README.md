@@ -202,6 +202,19 @@ The application is designed to run on Linux hosts and can be deployed using:
 - **Systemd**: Set up as a system service
 - **Nginx**: Use as a reverse proxy for production
 
+### Security Considerations for Production
+
+⚠️ **Important**: Before deploying to production, update the CORS configuration in `src/main.rs`:
+
+```rust
+let cors = Cors::default()
+    .allowed_origin("https://yourdomain.com")  // Replace with your domain
+    .allowed_methods(vec!["GET", "POST"])
+    .allowed_headers(vec![header::AUTHORIZATION, header::ACCEPT, header::CONTENT_TYPE]);
+```
+
+The current configuration allows any origin for development convenience but should be restricted in production.
+
 ### Example systemd service:
 
 ```ini

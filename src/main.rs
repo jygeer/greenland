@@ -157,8 +157,11 @@ async fn main() -> std::io::Result<()> {
     println!("📡 API endpoints available at http://localhost:8080/api/*");
     
     HttpServer::new(|| {
+        // CORS Configuration
+        // Note: For production, restrict allowed origins to specific domains
+        // Example: .allowed_origin("https://yourdomain.com")
         let cors = Cors::default()
-            .allow_any_origin()
+            .allow_any_origin()  // Development only - restrict in production
             .allow_any_method()
             .allow_any_header();
         
